@@ -15,15 +15,17 @@ class Counter extends Component {
   render() {
     return (
       <React.Fragment>
-        <span className={this.getBadgeClasses()}>{this.formatCount()}</span>
-        <button
-          onClick={this.doHandleIncrement}
-          className="btn btn-secondary btn-sm"
-        >
-          Increment
-        </button>
-        {this.state.tags.length === 0 && 'please create a new tag'}
-        {this.rendertags()}
+        <div>
+          <span className={this.getBadgeClasses()}>{this.formatCount()}</span>
+          <button
+            onClick={this.doHandleIncrement}
+            className="btn btn-secondary btn-sm"
+          >
+            Increment
+          </button>
+          {/* {this.state.tags.length === 0 && 'please create a new tag'}
+        {this.rendertags()} */}
+        </div>
       </React.Fragment>
     );
   }
@@ -39,19 +41,19 @@ class Counter extends Component {
     return count === 0 ? 'Zero' : count;
   }
 
-  rendertags() {
-    if (this.state.tags.length === 0) {
-      return <p>There are no tags!</p>;
-    } else {
-      return (
-        <ul>
-          {this.state.tags.map((tag) => (
-            <li key={tag}>{tag}</li>
-          ))}
-        </ul>
-      );
-    }
-  }
+  // rendertags() {
+  //   if (this.state.tags.length === 0) {
+  //     return <p>There are no tags!</p>;
+  //   } else {
+  //     return (
+  //       <ul>
+  //         {this.state.tags.map((tag) => (
+  //           <li key={tag}>{tag}</li>
+  //         ))}
+  //       </ul>
+  //     );
+  //   }
+  // }
 
   handleIncrement(product) {
     console.log(product);
