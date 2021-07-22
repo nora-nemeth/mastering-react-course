@@ -1,30 +1,23 @@
 import React, { Component } from 'react';
 
 class Counter extends Component {
-  state = {
-    count: 0,
-    tags: ['tag1', 'tag2', 'tag3'],
-  };
-
-  constructor() {
-    super();
-    this.handleIncrement = this.handleIncrement.bind(this);
-    this.doHandleIncrement = this.doHandleIncrement.bind(this);
-  }
-
   render() {
     return (
       <React.Fragment>
         <div>
           <span className={this.getBadgeClasses()}>{this.formatCount()}</span>
           <button
-            onClick={this.doHandleIncrement}
+            onClick={() => this.props.onIncrement(this.props.counter)}
             className="btn btn-secondary btn-sm"
           >
             Increment
           </button>
-          {/* {this.state.tags.length === 0 && 'please create a new tag'}
-        {this.rendertags()} */}
+          <button
+            onClick={() => this.props.onDelete(this.props.counter.id)}
+            className="btn btn-danger btn-sm m-2"
+          >
+            Delete
+          </button>
         </div>
       </React.Fragment>
     );
@@ -32,47 +25,13 @@ class Counter extends Component {
 
   getBadgeClasses() {
     let classes = 'badge m-2 badge-';
-    classes += this.state.count === 0 ? 'warning' : 'primary';
+    classes += this.props.counter.value === 0 ? 'warning' : 'primary';
     return classes;
   }
 
   formatCount() {
-    const { count } = this.state;
-    return count === 0 ? 'Zero' : count;
-  }
-
-  // rendertags() {
-  //   if (this.state.tags.length === 0) {
-  //     return <p>There are no tags!</p>;
-  //   } else {
-  //     return (
-  //       <ul>
-  //         {this.state.tags.map((tag) => (
-  //           <li key={tag}>{tag}</li>
-  //         ))}
-  //       </ul>
-  //     );
-  //   }
-  // }
-
-  handleIncrement(product) {
-    console.log(product);
-    this.setState({ count: this.state.count + 1 });
-  }
-
-  /* 
-    OR: Arrow functions don't rebind this, it inherits, so if we modify the handleIncrement function
-    to an arrow function, it will also solve the this reference problem:
-
-    handleIncrement = () => {
-      console.log(this);
-    }
-
-    In this way this will reference to the current Object (Counter)
-    */
-
-  doHandleIncrement() {
-    this.handleIncrement({ id: 1 });
+    const { value } = this.props.counter;
+    return value === 0 ? 'Zero' : value;
   }
 }
 
